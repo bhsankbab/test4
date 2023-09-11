@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Delete all test containers older than a month, using a wildcard
+      - name: Delete all test containers older than a week, using a wildcard
         uses: snok/container-retention-policy@v2
         with:
           image-names: hello
-          cut-off: Two month ago UTC
+          cut-off: A week ago UTC
           account-type: org
           org-name: bhsankbab
           keep-at-least: 1
