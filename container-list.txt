@@ -1,5 +1,0 @@
-hello
-uat/hello
-bn-kube-bench
-new
-105b
