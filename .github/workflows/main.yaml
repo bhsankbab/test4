@@ -11,13 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          sparse-checkout: |
-            org-repos
           sparse-checkout-cone-mode: false
       - name: Get Package Names
         id: names
         run: |
-            names=$(cat org-repos/repositories.json | jq -r '.[] | .name' |  tr -s '\n' ',' | awk 'gsub(/,$/,x)')
+            names=$(cat container-list.txt |  tr -s '\n' ',' | awk 'gsub(/,$/,x)')
             echo "$names" 
             echo "image_names=$names" >> $GITHUB_OUTPUT
       - name: Check outputs
