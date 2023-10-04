@@ -1,19 +1,33 @@
-name: Delete old container images
-
+name: 'Container Delete'
 on:
-  workflow_dispatch:
-
+  workflow_dispatch: 
 
 jobs:
   clean-ghcr:
     name: Delete old unused container images
     runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.names.outputs.image_names }}
     steps:
-
-      - name: Delete all test containers older than a week, using a wildcard
+      - uses: actions/checkout@v3
+        with:
+          sparse-checkout: |
+            org-repos
+          sparse-checkout-cone-mode: false
+      - name: Get Package Names
+        id: names
+        run: |
+            names=$(cat org-repos/repositories.json | jq -r '.[] | .name' |  tr -s '\n' ',' | awk 'gsub(/,$/,x)')
+            echo "$names" 
+            echo "image_names=$names" >> $GITHUB_OUTPUT
+      - name: Check outputs
+        run: |
+          echo " Value from Output displays here "
+          echo ${{ steps.names.outputs.image_names }}
+      - name: Delete all test containers older than six months, using a wildcard
         uses: snok/container-retention-policy@v2
         with:
-          image-names: hello
+          image-names: '${{ steps.names.outputs.image_names }}'
           cut-off: A week ago UTC
           account-type: org
           org-name: bhsankbab
