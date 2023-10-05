@@ -16,7 +16,7 @@ jobs:
         run: |
           names="hello,babu"
           echo 'image_names=["'"${names}"'"]' >> "$GITHUB_OUTPUT"
-      - name: Get Package Names
+      - name: Check Outputs
         run: |
             echo Value is "${{ steps.names.outputs.image_names }}"
   build:
