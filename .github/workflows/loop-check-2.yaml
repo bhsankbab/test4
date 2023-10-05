@@ -15,7 +15,7 @@ jobs:
       - name: Get Package Names
         id: names
         run: |
-            names=$(cat container-images.list.json | jq -r '.[] | .name' |  tr -s '\n' ',' | awk 'gsub(/,$/,x)')
+            names=[1,2,3]
             echo "$names" 
             echo "image_names=$names" >> $GITHUB_OUTPUT
   build:
