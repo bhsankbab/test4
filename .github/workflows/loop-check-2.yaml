@@ -33,5 +33,8 @@ jobs:
           min-versions-to-keep: 3
           delete-only-pre-release-versions: "true"
           token: ${{ secrets.MY_TOKEN }}
+      - name: check
+        run: |
+            echo "$env.STACK_NAME"
         env:
           STACK_NAME: ${{ matrix.name }}
