@@ -34,4 +34,4 @@ jobs:
           delete-only-pre-release-versions: "true"
           token: ${{ secrets.MY_TOKEN }}
         env:
-          STACK_NAME: ${{ matrix.name }}
+          STACK_NAME: ${{ matrix.include }}
