@@ -1,4 +1,4 @@
-name: 'Container Delete'
+name: 'Loop check'
 on:
   workflow_dispatch: 
 
