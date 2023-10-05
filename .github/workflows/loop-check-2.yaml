@@ -21,17 +21,12 @@ jobs:
   matrix_job_test:
     name: Matrix job test
     runs-on: ubuntu-latest
-    needs: test_job
-    strategy:
-      matrix:
-        include: ${{ fromJSON(needs.test_job.outputs.new_content) }}
     steps:
       - uses: actions/delete-package-versions@v4
         with: 
           package-name: hello
           package-type: 'container'
-          min-versions-to-keep: 10
+          min-versions-to-keep: 4
           delete-only-pre-release-versions: "true"
           token: ${{ secrets.MY_TOKEN }}
-        env:
-          STACK_NAME: ${{ matrix.name }}      
+    
