@@ -11,7 +11,7 @@ jobs:
     steps:
       - id: matrix
         run: |
-          echo '::set-output name=value::[\"a\", \"b\", \"c\"]'
+          echo '::set-output name=value::["a", "b", "c"]'
   build:
     needs: [ setup ]
     runs-on: ubuntu-latest
@@ -19,5 +19,7 @@ jobs:
       matrix:
         value: ${{fromJSON(needs.setup.outputs.matrix)}}
     steps:
+env:
+          OUTPUT: ${{ steps.id.outputs.arr }}
       - run: |
           echo "${{ matrix.value }}"
