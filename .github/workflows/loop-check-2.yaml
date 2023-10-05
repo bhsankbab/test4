@@ -15,7 +15,7 @@ jobs:
         id: names
         run: |
           names=[1, 2]
-          echo 'image_names="'"${names}"'"' >> "$GITHUB_OUTPUT"
+          echo "image_names=$names" >> $GITHUB_OUTPUT
       - name: Check Outputs
         run: |
             echo Value is "${{ steps.names.outputs.image_names }}"
