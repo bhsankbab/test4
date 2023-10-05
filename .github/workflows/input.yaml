@@ -2,6 +2,9 @@ name: 'Loop check 2'
 on:
   workflow_dispatch: 
 
+env:
+  STACK_NAME: hello
+
 jobs:
   matrix_job_test:
     name: Matrix job test
@@ -14,5 +17,4 @@ jobs:
           min-versions-to-keep: 3
           delete-only-pre-release-versions: "true"
           token: ${{ secrets.MY_TOKEN }}
-        env:
-          STACK_NAME: hello
+
