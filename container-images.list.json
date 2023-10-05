@@ -1,3 +1,5 @@
 [
-	{ "name":"hello"}
+	{ "name":"hello"},
+	{ "name":"bn-kube-bench"},
+	{ "name":"uat/hello"},
 ]
