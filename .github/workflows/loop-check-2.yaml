@@ -28,6 +28,6 @@ jobs:
     steps:
       - name: check
         run: |
-            echo "$env.STACK_NAME"
+            echo "$STACK_NAME"
         env:
           STACK_NAME: ${{ matrix.name }}
