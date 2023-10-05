@@ -14,7 +14,7 @@ jobs:
       - name: Get Package Names
         id: names
         run: |
-          names="hello, babu"
+          names="1, 2"
           echo 'image_names=["'"${names}"'"]' >> "$GITHUB_OUTPUT"
       - name: Check Outputs
         run: |
