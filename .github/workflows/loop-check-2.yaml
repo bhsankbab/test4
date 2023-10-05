@@ -30,7 +30,7 @@ jobs:
         with: 
           package-name: '${{ env.STACK_NAME }}'
           package-type: 'container'
-          min-versions-to-keep: 3
+          min-versions-to-keep: 1
           delete-only-pre-release-versions: "true"
           token: ${{ secrets.MY_TOKEN }}
         env:
