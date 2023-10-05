@@ -30,7 +30,7 @@ jobs:
         with: 
           package-name: hello
           package-type: 'container'
-          min-versions-to-keep: 10
+          min-versions-to-keep: 4
           delete-only-pre-release-versions: "true"
           token: ${{ secrets.MY_TOKEN }}
         env:
