@@ -3,12 +3,24 @@ on:
   workflow_dispatch: 
 
 jobs:
-  loopcheck:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.names.outputs.image_names }}
+    steps:
+      - name: Get Package Names
+        id: names
+        run: |
+            names=$(cat container-images.list.json | jq -r '.[] | .name' |  tr -s '\n' ',' | awk 'gsub(/,$/,x)')
+            echo "$names" 
+            echo "image_names=$names" >> $GITHUB_OUTPUT
+  build:
+    needs: prepare
     strategy:
       matrix:
-        scssfiles: [fileone,file2]
-    runs-on: [ubuntu-latest]
+        edition: ['${{ steps.names.outputs.image_names }}']
     steps:
       - name: test
         run: |
-          echo ${{ matrix.scssfiles }}.scss
+          echo ${{ matrix.edition }}
+
