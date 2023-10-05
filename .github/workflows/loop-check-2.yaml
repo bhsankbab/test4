@@ -19,7 +19,5 @@ jobs:
       matrix:
         value: ${{fromJSON(needs.setup.outputs.matrix)}}
     steps:
-env:
-          OUTPUT: ${{ steps.id.outputs.arr }}
       - run: |
           echo "${{ matrix.value }}"
