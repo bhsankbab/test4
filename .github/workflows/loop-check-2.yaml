@@ -7,17 +7,23 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.matrix.outputs.value }}
+      image_tag: ${{ steps.names.outputs.image_names }}
     steps:
-      - id: matrix
+      - uses: actions/checkout@v3
+        with:
+          sparse-checkout-cone-mode: false
+      - name: Get Package Names
+        id: names
         run: |
-          echo '::set-output name=value::["a", "b", "c"]'
+            names=$(cat container-images.list.json | jq -r '.[] | .name' |  tr -s '\n' ',' | awk 'gsub(/,$/,x)')
+            echo "$names" 
+            echo "image_names=$names" >> $GITHUB_OUTPUT
   build:
     needs: [ setup ]
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{fromJSON(needs.setup.outputs.matrix)}}
+        value: ${{fromJSON(needs.setup.outputs.image_tag)}}
     steps:
       - run: |
           echo "${{ matrix.value }}"
