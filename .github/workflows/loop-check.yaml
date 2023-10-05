@@ -18,7 +18,7 @@ jobs:
     needs: prepare
     strategy:
       matrix:
-        edition: ['${{ steps.names.outputs.image_names }}']
+        edition: ["${{ steps.names.outputs.image_names }}"]
     steps:
       - name: test
         run: |
