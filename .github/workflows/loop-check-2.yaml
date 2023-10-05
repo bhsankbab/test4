@@ -26,7 +26,11 @@ jobs:
       matrix:
         include: ${{ fromJSON(needs.test_job.outputs.new_content) }}
     steps:
-      - run: |
-          echo $STACK_NAME
+      - uses: actions/delete-package-versions@v4
+        with: 
+          package-name: '$STACK_NAME'
+          package-type: 'npm'
+          min-versions-to-keep: 10
+          delete-only-pre-release-versions: "true"
         env:
           STACK_NAME: ${{ matrix.name }}      
