@@ -15,9 +15,12 @@ jobs:
       - name: Get Package Names
         id: names
         run: |
-            names=[hello, babu]
+            names="[hello, babu]"
             echo "$names" 
             echo "image_names=$names" >> $GITHUB_OUTPUT
+      - name: Get Package Names
+        run: |
+            echo "${{ steps.names.outputs.image_names }}"
   build:
     needs: [ setup ]
     runs-on: ubuntu-latest
