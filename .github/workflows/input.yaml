@@ -1,4 +1,4 @@
-name: 'Loop check 2'
+name: 'INPUT'
 on:
   workflow_dispatch: 
 
