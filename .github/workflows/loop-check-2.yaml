@@ -3,14 +3,30 @@ on:
   workflow_dispatch: 
 
 jobs:
-  example_matrix:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.names.outputs.image_names }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          sparse-checkout-cone-mode: false
+      - name: Get Package Names
+        id: names
+        run: |
+            names=[hello, babu]
+            echo "$names" 
+            echo "image_names=$names" >> $GITHUB_OUTPUT
+      - name: Get Package Names
+        run: |
+            echo Value is "${{ steps.names.outputs.image_names }}"
+  build:
+    needs: [ setup ]
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu-22.04, ubuntu-20.04]
-        version: [10, 12, 14]
-    runs-on: ${{ matrix.os }}
+        os: ${{fromJSON(needs.setup.outputs.image_tag)}}
     steps:
-      - name: echo
-        run: |
-            echo "${{ matrix.os }}"
+      - run: |
+          echo "${{ matrix.os }}"
       
