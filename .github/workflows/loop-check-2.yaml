@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: ${{fromJSON(needs.setup.outputs.image_tag)}}
+        os: ${{ needs.setup.outputs.image_tag }}
     steps:
       - run: |
           echo "${{ matrix.os }}"
