@@ -14,9 +14,8 @@ jobs:
       - name: Get Package Names
         id: names
         run: |
-            names=([hello, babu])
-            echo "$names" 
-            echo "image_names=$names" >> $GITHUB_OUTPUT
+          names="[hello,babu]"
+          echo 'image_names=["'"${names}"'"]' >> "$GITHUB_OUTPUT"
       - name: Get Package Names
         run: |
             echo Value is "${{ steps.names.outputs.image_names }}"
@@ -25,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: ${{ needs.setup.outputs.image_tag }}
+        os: ${{fromJson(needs.setup.outputs.image_tag)}}
     steps:
       - run: |
           echo "${{ matrix.os }}"
