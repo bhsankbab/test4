@@ -16,6 +16,7 @@ jobs:
             echo "image_names=$names" >> $GITHUB_OUTPUT
   build:
     needs: prepare
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         edition: ["${{ needs.prepare.outputs.image_tag }}"]
