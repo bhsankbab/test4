@@ -24,6 +24,9 @@ jobs:
             cat sorted_page.txt
             cat single_page.txt |  tr -s '\n' ',' | awk 'gsub(/,$/,x)' > comma-separated
             done
+            cat pages.txt
+            cat sorted_page.txt
+            cat comma-separated
             names=$(cat comma-separated)
             echo "$names" 
             echo "image_names=$names" >> $GITHUB_OUTPUT
